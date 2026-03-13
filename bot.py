@@ -3,7 +3,7 @@ from threading import Thread
 import telebot
 import os
 
-TOKEN = os.environ['TOKEN']
+TOKEN = os.environ['TOKEN']  # Make sure you set this in Railway variables
 bot = telebot.TeleBot(TOKEN)
 
 @bot.message_handler(commands=['start'])
@@ -20,5 +20,7 @@ def home():
 def run():
     app.run(host='0.0.0.0', port=int(os.environ.get("PORT", 5000)))
 
+# Run Flask in a separate thread
 Thread(target=run).start()
+
 bot.infinity_polling()
